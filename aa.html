@@ -1,0 +1,43 @@
+<form id="contactFreeOnlineForm" class="contactFreeOnlineForm" name="contactFreeOnlineForm">        
+      <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label play">Email address</label>
+          <input type="email" class="form-control" aria-describedby="emailHelp" id="email">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputName" class="form-label play">First Name</label>
+          <input type="name" class="form-control" aria-describedby="emailHelp" id="name">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputName" class="form-label play">Company</label>
+          <input type="text" class="form-control" aria-describedby="emailHelp" id="subject">
+          
+        </div>
+        
+        <button type="submit" class="btn btn-primary" onclick="sendMail()">Submit</button>
+        <div class="row">
+<div class="col-md-5">
+<div id="emailSendResult"></div>
+</div>
+</div>
+      </form>
+      
+      <script>
+function sendMail(){
+var getname = jQuery('#name').val();
+var getemail = jQuery('#email').val();
+var getSubject = jQuery('#subject').val();
+if(getname != '' && getname != '' && getname != ''){
+jQuery('#emailSendResult').html('Mail Sending...');
+$.ajax({
+url:'submitForm.php',
+data:{ name:getname, email:getemail, subject:getSubject},
+method: 'POST',
+success: function(data){
+jQuery('#emailSendResult').html(data);
+}
+});
+}else{
+jQuery('#emailSendResult').html('Please Enter All Required Fields.');
+}
+}
+</script>
